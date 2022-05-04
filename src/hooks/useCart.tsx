@@ -6,7 +6,6 @@ import { Product, Stock } from '../types';
 interface CartProviderProps {
   children: ReactNode;
 }
-
 interface UpdateProductAmount {
   productId: number;
   amount: number;
@@ -34,7 +33,17 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const addProduct = async (productId: number) => {
     try {
-      // TODO
+      const response = await api.get(`http://localhost:3333/products/${productId}`);
+
+      const updatedCart = [
+        ...cart,
+        response.data
+      ];
+
+      setCart(updatedCart);
+
+      localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart));
+      // console.log('addProduct', addProduct);
     } catch {
       // TODO
     }
