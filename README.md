@@ -1,4 +1,4 @@
-# Challenge02-Creating-Shopping-Cart-Hook
+# 🚀 Challenge02-Creating-Shopping-Cart-Hook 🚀
 
 In this challenge, I will have to create an application to practice what I have learned so far in ReactJS
 
@@ -13,6 +13,6 @@ This will be an application where my main goal is to create a shopping cart hook
 - Among others.
 
 
-Challenge link ![image](https://user-images.githubusercontent.com/56567246/166704014-743dc90d-ded5-43c0-8562-922bbdceabab.png)
+Challenge link ⤵️
 
 https://www.notion.so/Desafio-01-Criando-um-hook-de-carrinho-de-compras-5769216778794019a83f544e79167b12
