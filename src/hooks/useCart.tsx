@@ -31,13 +31,6 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
   const addProduct = async (productId: number) => {
     try {
-      const responseProducts = await api.get(`/products/${productId}`);
-
-      const newProduct = {
-        ...responseProducts.data,
-        amount: 1
-      };
-
       const productExistInCart = cart.find((product) => product?.id === productId);
 
       if (!!productExistInCart) {
@@ -52,6 +45,13 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         localStorage.setItem('@RocketShoes:cart', JSON.stringify(updateProductQuantity));
 
       } else {
+        const productProperty = await api.get(`/products/${productId}`);
+
+        const newProduct = {
+          ...productProperty.data,
+          amount: 1
+        };
+
         const updatedCart = [
           ...cart,
           newProduct,
@@ -60,7 +60,6 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
         setCart(updatedCart);
         localStorage.setItem('@RocketShoes:cart', JSON.stringify(updatedCart));
       }
-
     } catch (err) {
       // TODO
       console.log(err);
