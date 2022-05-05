@@ -26,12 +26,13 @@ const Home = (): JSX.Element => {
   const { addProduct, cart } = useCart();
 
   // const cartItemsAmount = cart.reduce((sumAmount, product) => {
-  //   // TODO
+  //   // TODOw
+
   // }, {} as CartItemsAmount)
 
   useEffect(() => {
     async function loadProducts() {
-      api.get('http://localhost:3333/products').then(response => setProducts(response.data))
+      api.get('/products').then(response => setProducts(response.data))
     }
     loadProducts();
   }, []);
