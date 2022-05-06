@@ -35,10 +35,14 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       if (!!productExistInCart) {
         const updateProductQuantity = cart.map((product) => {
-          return {
-            ...product,
-            amount: product.amount + 1
-          };
+          if (product.id === productId) {
+            return {
+              ...product,
+              amount: product.amount + 1
+            };
+          } else {
+            return product
+          }
         });
 
         setCart(updateProductQuantity);
@@ -52,6 +56,8 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
           amount: 1
         };
 
+        console.log('newProduct', newProduct)
+
         const updatedCart = [
           ...cart,
           newProduct,
@@ -62,7 +68,6 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
       }
     } catch (err) {
       // TODO
-      console.log(err);
       toast.error('Quantidade solicitada fora de estoque');
     }
   };
