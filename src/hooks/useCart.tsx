@@ -91,11 +91,39 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
     amount,
   }: UpdateProductAmount) => {
     try {
-      // TODO
+      if (amount <= 0) {
+        return;
+      } else {
+        const stockProperty = await api.get(`/stock/${productId}`);
+        const existAmountStock = cart.find((product) => product?.id === productId);
+        console.log('stockProperty', stockProperty)
+        console.log('existAmountStock', existAmountStock);
+        console.log('amount', amount);
+
+        if (existAmountStock) {
+
+          if (existAmountStock.amount <= amount) {
+            return {
+              ...existAmountStock,
+              amount: amount + 1,
+            }
+          } else {
+            toast.error('Quantidade solicitada fora de estoque');
+          }
+          if (existAmountStock.amount > amount) {
+            return {
+              ...existAmountStock,
+              amount: amount - 1
+            }
+          }
+        }
+      }
     } catch {
-      // TODO
+      toast.error('Erro na alteração de quantidade do produto');
     }
   };
+
+
 
   return (
     <CartContext.Provider
